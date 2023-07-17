@@ -1,3 +1,11 @@
+<?php
+include './database/database.php';
+include './database/utility.php';
+
+$sql = "SELECT * FROM `faculties`";
+$result = excuteResult($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -352,40 +360,40 @@
             </ul>
           </nav>
           <!-- End of Topbar -->
-
+<!-- them o day -->
           <!-- Begin Page Content -->
           <div class="container-fluid">
+            
             <div class="text-right my-3">
-              <button class="btn btn-primary">Thêm</button>
+              <a href="./database/faculty/add.php" class="btn btn-primary">Thêm</a>
             </div>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col" style="width: 150px">Handle</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Icon</th>
+                  <th scope="col" style="width: 175px">Handle</th>
                 </tr>
               </thead>
+              <form action="./database/faculty/delete.php" method="post">
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td><button class="btn btn-success mr-3">Sửa</button><button class="btn btn-danger">Xoá</button></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                <?php
+                  foreach($result as $row) { ?>
+                  <tr> 
+                    <th scope="row"><?php echo $row['id'];?> </th>
+                    <td><?php echo $row['name']; ?></td>
+                     <td><?php echo $row['icon']; ?></td>
+                     <td>
+                      <a href="./database/faculty/update.php" class="btn btn-success mr-3">Sửa</a>
+                      <a href="./database/faculty/delete.php" class="btn btn-danger" >Xoá</button>
+                    </td>
+                  </tr>
+                  <?php }
+                ?>
               </tbody>
+              </form>
+            
             </table>
           </div>
           <!-- /.container-fluid -->
